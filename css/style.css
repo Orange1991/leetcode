@@ -1,0 +1,18 @@
+/**
+ * 题目描述中用到的一些css样式
+ */
+
+/*  */
+.block {
+  margin-top: 20px;
+}
+/* 块的标题 */
+.block-title {
+  font-weight: bold;
+}
+/* 块的内容 */
+.block-body {
+  border-left: 5px solid #ddd;
+  padding: 1px 10px;
+  margin-top: 10px;
+}
