@@ -30,13 +30,13 @@ struct TreeNode* buildTree(int* inorder, int inorderSize, int* postorder, int po
 /**
  * 根据中序遍历和后序遍历的子序列构造子二叉树
  * 序列中不存在重复元素
- * input preorder : 中序遍历序列
- * input preStart : 中序子序列开始位置的上一个位置
- * input preEnd   : 中序子序列结束位置
- * input inorder  : 后序遍历序列
- * input inStart  : 后序子序列开始位置的上一个位置
- * input inEnd    : 后序子序列结束位置
- * return         : 构造好的二叉树
+ * input inorder    : 中序遍历序列
+ * input inStart    : 中序子序列开始位置的上一个位置
+ * input inEnd      : 中序子序列结束位置
+ * input postorder  : 后序遍历序列
+ * input postStart  : 后序子序列开始位置的上一个位置
+ * input postEnd    : 后序子序列结束位置
+ * return           : 构造好的二叉树
  */
 struct TreeNode* buildChildTree(int* inorder, int inStart, int inEnd, int* postorder, int postStart, int postEnd) {	
 
@@ -57,7 +57,6 @@ struct TreeNode* buildChildTree(int* inorder, int inStart, int inEnd, int* posto
     int startTmp = inEnd, endTmp = inEnd;
     while (startTmp > inStart && *(inorder + startTmp) != root->val)
         --startTmp;
-    //return root;
     root->right = buildChildTree(inorder, startTmp, endTmp, 
             postorder, postEnd - endTmp + startTmp - 1, postEnd - 1);	// 构造右子树
     root->left = buildChildTree(inorder, inStart, startTmp - 1,
