@@ -46,8 +46,9 @@ The flattened tree should look like:
 
 运行情况:
 
-Language  Status  Time
-c         Accept  4ms
+No  Language  Status  Time  Keywords
+1   c         Accept  4ms   Recursive, DP
+2   c         Accept  4ms   Loop, DP, in-place
 
 -------------------------------------------------------------------
 
