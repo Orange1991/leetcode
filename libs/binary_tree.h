@@ -1,9 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #ifndef BINARY_TREE_H
 #define BINARY_TREE_H
-#endif
+
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * 二叉树结点定义
@@ -148,3 +147,5 @@ void freeBinaryTree(struct TreeNode *root) {
     freeBinaryTree(root->right);
     free(root);
 }
+
+#endif
