@@ -17,16 +17,16 @@ struct TreeNode {
  */
 void flattenRecursive(struct TreeNode** last, struct TreeNode* root) {
     if (root == NULL) return;
-	(*last)->right = root; // 将root挂在*last存储的地址指向的右结点上
-	(*last)->left = NULL;  // 将*last所存储的地址指向的左结点置空
+    (*last)->right = root; // 将root挂在*last存储的地址指向的右结点上
+    (*last)->left = NULL;  // 将*last所存储的地址指向的左结点置空
     *last = root;    // 更新最后一个结点信息，last存储当前结点的地址
 
     // 暂存一下root的左右结点的地址，因为在递归调用中root的左右结点的值会被更改
-	struct TreeNode* left = root->left, * right = root->right;
+    struct TreeNode* left = root->left, * right = root->right;
     // 递归，扁平化处理左子树
     flattenRecursive(last, left);
     // 递归，扁平化处理右子树
-	flattenRecursive(last, right);
+    flattenRecursive(last, right);
 }
 
 /**
@@ -35,8 +35,8 @@ void flattenRecursive(struct TreeNode** last, struct TreeNode* root) {
 void flatten(struct TreeNode* root) {    
     if (root == NULL) return; // 空树直接返回
     // 一个固定内存，用于存储上一个访问的结点的地址
-	struct TreeNode** last = (struct TreeNode**)malloc(sizeof(struct TreeNode*));
-	struct TreeNode tmp;
+    struct TreeNode** last = (struct TreeNode**)malloc(sizeof(struct TreeNode*));
+    struct TreeNode tmp;
     *last = &tmp;
     // 递归扁平化处理
     flattenRecursive(last, root);
@@ -53,9 +53,9 @@ int main() {
     n5.val = -5; n5.left = &n9; n5.right = &n10;
     n6.val = -1; n6.left = NULL; n6.right = NULL;
     n7.val = -9; n7.left = &n11; n7.right = &n12;
-	n8.val = 9; n8.left = NULL; n8.right = NULL;
-	n9.val = 8; n9.left = NULL; n9.right = &n13;
-	n10.val = 8; n10.left = NULL; n10.right = &n14;
+    n8.val = 9; n8.left = NULL; n8.right = NULL;
+    n9.val = 8; n9.left = NULL; n9.right = &n13;
+    n10.val = 8; n10.left = NULL; n10.right = &n14;
     n11.val = -5; n11.left = NULL; n11.right = NULL;
     n12.val = 6; n12.left = &n15; n12.right = &n16;
     n13.val = -4; n13.left = NULL; n13.right = NULL;
@@ -73,5 +73,5 @@ int main() {
         p = p->right;
     }
 
-	return 0;
+    return 0;
 }

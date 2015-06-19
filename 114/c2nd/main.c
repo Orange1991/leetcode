@@ -13,17 +13,17 @@ struct TreeNode {
  * 扁平化处理二叉树
  */
 void flatten(struct TreeNode* root) {    
-	struct TreeNode* p;
-	while (root != NULL) { // root不为空，则继续调整
-		if (root->left) {  // 如果当前结点有左子树才调整
-			p = root->left;// 指向左结点
-			while (p->right) p = p->right; // 指向最右下角的结点
-			p->right = root->right; // 把当前结点的右子树挂在左子树的最右下角结点上
-			root->right = root->left; // 当前结点的左子树挂在右结点上
-			root->left = NULL; // 当前结点的左子树置空
-		} // 调整结束后，当前结点左结点为空，右结点不一定
-		root = root->right; // 指向当前结点的右结点，继续调整
-	}
+    struct TreeNode* p;
+    while (root != NULL) { // root不为空，则继续调整
+        if (root->left) {  // 如果当前结点有左子树才调整
+            p = root->left;// 指向左结点
+            while (p->right) p = p->right; // 指向最右下角的结点
+            p->right = root->right; // 把当前结点的右子树挂在左子树的最右下角结点上
+            root->right = root->left; // 当前结点的左子树挂在右结点上
+            root->left = NULL; // 当前结点的左子树置空
+        } // 调整结束后，当前结点左结点为空，右结点不一定
+        root = root->right; // 指向当前结点的右结点，继续调整
+    }
 }
 
 int main() {
@@ -35,9 +35,9 @@ int main() {
     n5.val = -5; n5.left = &n9; n5.right = &n10;
     n6.val = -1; n6.left = NULL; n6.right = NULL;
     n7.val = -9; n7.left = &n11; n7.right = &n12;
-	n8.val = 9; n8.left = NULL; n8.right = NULL;
-	n9.val = 8; n9.left = NULL; n9.right = &n13;
-	n10.val = 8; n10.left = NULL; n10.right = &n14;
+    n8.val = 9; n8.left = NULL; n8.right = NULL;
+    n9.val = 8; n9.left = NULL; n9.right = &n13;
+    n10.val = 8; n10.left = NULL; n10.right = &n14;
     n11.val = -5; n11.left = NULL; n11.right = NULL;
     n12.val = 6; n12.left = &n15; n12.right = &n16;
     n13.val = -4; n13.left = NULL; n13.right = NULL;
@@ -55,5 +55,5 @@ int main() {
         p = p->right;
     }
 
-	return 0;
+    return 0;
 }

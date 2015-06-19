@@ -41,13 +41,14 @@ The flattened tree should look like:
 --------------------------------------------------------------------
 
 解题思路:
+http://blog.csdn.net/smile_watermelon/article/details/46563355
 
 --------------------------------------------------------------------
 
 运行情况:
 
 No  Language  Status  Time  Keywords
-1   c         Accept  4ms   Recursive, DP
+1   c         Accept  4ms   Recursive, DP, in-place
 2   c         Accept  4ms   Loop, DP, in-place
 
 -------------------------------------------------------------------
