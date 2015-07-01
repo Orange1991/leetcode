@@ -36,7 +36,7 @@ After calling your function, the tree should look like:
     4-> 5 -> 7 -> NULL
 
 ##结题思路
-
+http://blog.csdn.net/smile_watermelon/article/details/46711787
 ##运行结果
     Lauguage  Status  Time  Comment
     c         Accept  48ms  Violence
