@@ -16,42 +16,39 @@ public:
     void connect(struct TreeLinkNode *root) {
         if (root == NULL) return;
 
-        struct TreeLinkNode *begin = NULL, *p = root, *pre, *next;
+        struct TreeLinkNode *begin = NULL, *upperNode = root, *pre;
     
-        while (p != NULL) {
-            if (p->left != NULL) {
-                begin = p->left;
+        while (upperNode != NULL) {
+            if (upperNode->left != NULL) {
+                begin = upperNode->left;
                 break;
             }
-            else if (p->right != NULL) {
-                begin = p->right;
+            else if (upperNode->right != NULL) {
+                begin = upperNode->right;
                 break;
             }
-            else p = p->next;
+            else upperNode = upperNode->next;
         }
 
         if (begin == NULL) return;
 
         pre = begin;    
-        if (begin == p->left && p->right != NULL) {
-            next = p->right;
-            pre->next = next;
-            pre = next;
+        if (begin == upperNode->left && upperNode->right != NULL) {
+            pre->next = upperNode->right;
+            pre = pre->next;
         }
-        p = p->next;
+        upperNode = upperNode->next;
 
-        while ( p != NULL) {
-            if(p->left != NULL) {
-                next = p->left;
-                pre->next = next;
-                pre = next;
+        while ( upperNode != NULL) {
+            if(upperNode->left != NULL) {
+                pre->next = upperNode->left;
+                pre = pre->next;
             } 
-            if (p->right != NULL) {
-                next = p->right;
-                pre->next = next;
-                pre = next;
+            if (upperNode->right != NULL) {
+                pre->next = upperNode->right;
+                pre = pre->next;
             }
-            p = p->next;
+            upperNode = upperNode->next;
         }
 
         connect(begin);
