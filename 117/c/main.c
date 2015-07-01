@@ -5,22 +5,32 @@ struct TreeLinkNode {
     struct TreeLinkNode *left, *right, *next;
 };
 
+/**
+ * 填充二叉树的next指针
+ */
 void connect(struct TreeLinkNode *root) {
     int height(struct TreeLinkNode *);
     struct TreeLinkNode* findLeftestNode(struct TreeLinkNode *, int);
     struct TreeLinkNode* findRightestNode(struct TreeLinkNode *, int);
 
     if (root == NULL) return;
+
+    /* 获取左右子树高度 */
     int heightLeft = height(root->left);
     int heightRight = height(root->right);
+    // 确定当前需要connect的左右子树的层数
     int i = 1, end = heightLeft < heightRight ? heightLeft : heightRight;
+
+    /* 连接每一层，左子树的最右结点next指针指向右子树最左结点 */
     struct TreeLinkNode *left, *right;
-    while (i++ <= end) {
+    while (i <= end) {
         left = findRightestNode(root->left, i);
         right = findLeftestNode(root->right, i);
         left->next = right;
+        ++i;
     }
 
+    /* 递归填充处理左右子树 */
     connect(root->left);
     connect(root->right);
 }
