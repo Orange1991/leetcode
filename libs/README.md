@@ -12,7 +12,8 @@
 ###void inorderTraversal(struct TreeNode *) 中序遍历
 
 ###struct TreeNode* genBinaryTree(char *str) 创建二叉树
->/**
+```
+/**
  * 根据字符串构造二叉树
  * 除了数字/正负号/null/[]/逗号之外，不能有其他字符
  * 字符串可以以‘[’开始，以‘]’结束，且这两个字符只能出现在开头和结尾，也可以没有[]
@@ -21,5 +22,5 @@
  * 如果违反以上规则，返回NULL，否则返回一个树
  */
 struct TreeNode* genBinaryTree(char *str);
-
+```
 ###void freeBinaryTree(struct TreeNode *) 回收二叉树内存
