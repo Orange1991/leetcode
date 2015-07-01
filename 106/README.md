@@ -20,5 +20,4 @@ You may assume that duplicates do not exist in the tree.
     cpp       Accept  16ms
 
 ---
-// 2015/6/2
-
+2015/6/2
