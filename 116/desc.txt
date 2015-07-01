@@ -51,8 +51,8 @@ After calling your function, the tree should look like:
 
 --------------------------------------------------------------------------
 
-结题思路：
-
+解题思路：
+http://blog.csdn.net/smile_watermelon/article/details/46710205
 
 --------------------------------------------------------------------------
 
