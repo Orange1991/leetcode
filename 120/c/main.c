@@ -1,19 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/** 计算三角从上至小最小路径和 */
 int minimumTotal(int **triangle, int numRows) {
     int *minNums = (int *)malloc(sizeof(int) * numRows);
     int i, j;
 
+    /* 初始化 */
     for (i = 0; i < numRows; ++i)
         *(minNums + i) = *(*(triangle + numRows - 1) + i);
 
+    /* 循环求解 */
     for (i = numRows - 2; i > -1; --i) {
         for (j = 0; j <= i; ++j)
-            if (*(minNums + j) < *(minNums + j + 1))
-                *(minNums + j) = *(*(triangle + i) + j) + *(minNums + j);
-            else
-                *(minNums + j) = *(*(triangle + i) + j) + *(minNums + j + 1);
+            *(minNums + j) = *(*(triangle + i) + j) +
+                    (*(minNums + j) < *(minNums + j + 1)
+                    ? *(minNums + j) : *(minNums + j + 1));
    }
 
     i = *minNums;
