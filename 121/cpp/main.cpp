@@ -12,13 +12,12 @@ public:
      * @note : 只进行一次买卖
      */
     int maxProfit(vector<int>& prices) {
+        int pricesSize = prices.size();
         /* 如果价格数据为空，返回0  */
-        if (prices.size() <= 0) return 0;
-
+        if (pricesSize <= 0) return 0;
         vector<int> min(prices.size()), max(prices.size());
-        
         /* 统计某一天极其之前所有时间内价格的最小值  */
-        int i, pricesSize = prices.size(), minimal = prices[0], maximal = prices[pricesSize - 1];
+        int i, minimal = prices[0], maximal = prices[pricesSize - 1];
         min[0] = minimal; max[pricesSize - 1] = maximal;
         for (i = 1; i < pricesSize; ++i) {
             if (prices[i] < minimal) minimal = prices[i];
