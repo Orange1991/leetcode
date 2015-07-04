@@ -13,32 +13,17 @@ public:
      */
     int maxProfit(vector<int>& prices) {
         int pricesSize = prices.size();
-        /* 如果价格数据为空，返回0  */
-        if (pricesSize <= 0) return 0;
-        vector<int> min(prices.size()), max(prices.size());
-        /* 统计某一天极其之前所有时间内价格的最小值  */
-        int i, minimal = prices[0], maximal = prices[pricesSize - 1];
-        min[0] = minimal; max[pricesSize - 1] = maximal;
-        for (i = 1; i < pricesSize; ++i) {
-            if (prices[i] < minimal) minimal = prices[i];
-            min[i] = minimal;
-        }
-        /* 统计某一天极其之后所有时间内价格的最大值  */
-        for (i = pricesSize - 2; i > -1; --i) {
-            if (prices[i] > maximal) maximal = prices[i];
-            max[i] = maximal;
+        /* 如果价格数据为空,或者只有一个数据,返回0  */
+        if (pricesSize <= 1) return 0;
+
+        int day, diff, min = prices[0], max = 0;
+        for (day = 1; day < pricesSize; ++day) {
+            diff = prices[day] - min;
+            if (diff < 0) min = prices[day];
+            else if (diff > max) max = diff;
         }
 
-        /* 计算最大收益 */
-        int diff;
-        maximal = max[0] - min[0];
-        for (i = 1; i < pricesSize; ++i) {
-            diff = max[i] - min[i];
-            if (diff > maximal)
-                maximal = diff;
-        }
-
-        return maximal;
+        return max;
     }
 };
 
