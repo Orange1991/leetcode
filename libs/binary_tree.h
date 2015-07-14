@@ -79,7 +79,7 @@ struct TreeNode* genBinaryTree(char *str) {
                     if (*(str + 4) == ',') str += 4;
                     else str += 3;
                     break;
-                case ',': // 一个新的数字构造结束
+                case ',': { // 一个新的数字构造结束
                     success = 1;
                     val *= symbol;
                     if (cur >= total) {
@@ -90,8 +90,9 @@ struct TreeNode* genBinaryTree(char *str) {
                     *(nodes + cur++) = tmp1;
                     tmp1->val = val;
                     break;
+                }
                 case '\0':
-                case ']': // 整个数据都构造结束
+                case ']': { // 整个数据都构造结束
                     if (symbolFound && !start) return NULL; // 发现了正负号，但是没有数字就结束
                     if (start) {
                         val *= symbol;
@@ -106,6 +107,7 @@ struct TreeNode* genBinaryTree(char *str) {
                     end = 1;
                     success = 1;
                     break;
+                }
                 default: return NULL; // 非法字符
             }
             ++str;
