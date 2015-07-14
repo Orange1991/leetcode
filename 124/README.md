@@ -86,6 +86,7 @@ int maxChildPathSum(struct TreeNode *root, int *tmpMax) {
 int max(int arg1, int arg2) { return arg1 > arg2 ? arg1 : arg2; }
 ```
 >完整代码[https://github.com/Orange1991/leetcode/blob/master/124/c/main.c](https://github.com/Orange1991/leetcode/blob/master/124/c/main.c)
+
 ##代码cpp
 ```
 class Solution {
