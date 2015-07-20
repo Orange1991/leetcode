@@ -38,5 +38,11 @@ All words contain only lowercase alphabetic characters.
 
 ##解题思路
 
+##代码 cpp
+
+在`g++`环境下编译时需要加入参数`-std=c++0x`
+
+> g++ main.cpp -std=c++0x -o main
+
 ##
 
