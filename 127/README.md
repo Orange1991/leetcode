@@ -42,7 +42,7 @@ All words contain only lowercase alphabetic characters.
 
 在`g++`环境下编译时需要加入参数`-std=c++0x`
 
-> g++ main.cpp -std=c++0x -o main
+    g++ main.cpp -std=c++0x -o main
 
 ##
 
