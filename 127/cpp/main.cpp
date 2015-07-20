@@ -2,86 +2,77 @@
 #include <vector>
 #include <unordered_set>
 #include <unordered_map>
+#include <queue>
 
 using namespace std;
 
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, unordered_set<string>& dict) {      
-        /* 添加所有字符串到map */
-        unordered_map<string, int> map;
-        int index = 0;
-        string tmp;
-        map.insert(make_pair(beginWord, index++));
-        map.insert(make_pair(endWord, index++));
+        if (beginWord == endWord || beginWord.size() != endWord.size())
+            return 0;
 
-        if (dict.find(beginWord) != dict.end())
-            dict.erase(beginWord);
-        if (dict.find(endWord) != dict.end())
-            dict.erase(endWord);
+        if (isOneCharDiff(beginWord, endWord)) return 2;
 
-        for(unordered_set<string>::iterator it = dict.begin(), itEnd = dict.end(); it != itEnd; ++it) {
-            map.insert(make_pair(*it, index++));
-        }
+        /* 广度优先遍历 
+         * 遍历到的新点入队列queue
+         * 同时将源点beginWord到新点的距离存在visited中 */
+        queue<string> queue;
+        queue.push(beginWord);
+        unordered_map<string, int> visited;
+        visited.insert(make_pair(beginWord, 1));
 
-        /* 完成下标到字符串的映射 */
-        vector<string> list(map.size());
-        for (unordered_map<string, int>::iterator it = map.begin(), end = map.end(); it != end; ++it) {
-            cout << it->second << "-->" << it->first << endl;            
-            list[it->second] = it->first;
-        }
-// 往上都测试过了，没问题
+        string tmp, sbStr;
+        int len, distance;
+        while (!queue.empty()) {
+            // 获取队首元素
+            tmp = queue.front();
+            queue.pop();
+            // 依次将字符串的某一位替换为a-z中的字母
+            len = tmp.size();
+            for (int i = 0; i < len; ++i) {
+                for (char c = 'a'; c <= 'z'; ++c) {
+                    // 如果替换后字符串没有变化，则跳过此次尝试
+                    if (tmp[i] == c) continue;
 
-        /* 构造无向图的邻接表 */
-/*        int len = list.length;
-        vector<int> head = new vector<int>(len);
-        int indexOfArgNode = 0;
-        vector<int> args, p;
-        for (int i = 0; i < len; ++i) {
-            heads[i] = -1;
-        }
-        for (int i = 0; i < len - 1; ++i) {
-            for (int j = i + 1; j < len; ++j) {
-                if (diff(list[i], list[j]) == 1) {
-                    args.add(heads[i]);
-                    p.add(j);
-                    heads[i] = indexOfArgNode++;
-                    args.add(heads[j]);
-                    p.add(i);
-                    heads[j] = indexOfArgNode++;
+                    // 拷贝原字符串，并修改某一位为某一个字符
+                    sbStr = tmp;
+                    sbStr[i] = c;
+                    // 从visited中获取beginWord到tmp的距离并加1
+                    distance = visited.find(tmp)->second + 1; 
+
+                    // 如果新字符串就是endWord，返回距离
+                    if (sbStr == endWord)
+                        return distance;
+
+                    // 如果字典中有这个字符串，并且这个字符串是第一次被遍历到
+                    // 则将其作为新字符串添加到队列queue中，并添加到visited中&记录距离
+                    if (dict.find(sbStr) != dict.end() && visited.find(sbStr) == visited.end()) {
+                        queue.push(sbStr);
+                        visited.insert(make_pair(sbStr, distance));
+                    }
                 }
             }
         }
-  */      
-        /* 广度优先遍历 */
-  /*      int queue[] = new int[len], queCur = 0, queEnd = 0;
-        boolean[] visited = new boolean[len];
-        int[] distance = new int[len];
-        for (int i = 0; i < len; ++i) {
-            visited[i] = false;
-            distance[i] = 0;
-        }
-        queue[queEnd++] = 0;
-        visited[0] = true;
-        int node, target;
-        while (queCur < queEnd) {
-            node = heads[queue[queCur]];
-            while (node != -1) {
-                target = p.get(node);
-                if (!visited[target]) {
-                    visited[target] = true;
-                    queue[queEnd++] = target;
-                    distance[target] = distance[queue[queCur]] + 1;
-                }
-                node = args.get(node);
-            }
-            ++queCur;
-        }
 
-        return visited[1] ? distance[1] + 1 : 0;
-*/return 0;
+        // 执行至此，说明图为非连通图，beginWord和endWord之间不能转换
+        return 0;
+
     }
 
+private:
+    /** 判定两个字符串的差异度是否为1 */
+    bool isOneCharDiff(string str1, string str2) {
+        int count = 0, len = str1.size();
+        for (int i = 0; i < len; ++i) {
+            if (str1[i] != str2[i]) {
+                ++count;
+                if (count > 1)
+                    return false;
+            }
+        }
+        return count == 1;
+    }
 };
 
 int main(void) {
@@ -94,6 +85,14 @@ int main(void) {
     dict.insert("log");
 
     Solution s;
+    cout << s.ladderLength(startWord, endWord, dict) << endl;
+    
+    startWord = "a";
+    endWord = "b";
+    dict.clear();
+    dict.insert("a");
+    dict.insert("b");
+    dict.insert("c");
     cout << s.ladderLength(startWord, endWord, dict) << endl;
 
 }
