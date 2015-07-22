@@ -44,5 +44,20 @@ All words contain only lowercase alphabetic characters.
 
     g++ main.cpp -std=c++0x -o main
 
-##
+> https://github.com/Orange1991/leetcode/blob/master/127/cpp/solution2.cpp
+> https://github.com/Orange1991/leetcode/blob/master/127/cpp/main.cpp
 
+##代码 java
+
+> https://github.com/Orange1991/leetcode/blob/master/127/java/Solution.java
+
+##解决情况
+| Language | Name | Time |
+| :------- | : -- | :--- |
+| cpp      | main.cpp | 792ms |
+| cpp      | solution2.cpp | 524ms |
+| java     | Solution.java | 556ms |
+
+
+---
+2015/7/20
