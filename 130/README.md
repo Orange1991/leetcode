@@ -1,9 +1,49 @@
-#include <iostream>
-#include <queue>
-#include <vector>
+#Surrounded Regions
+##原题地址
+https://leetcode.com/problems/surrounded-regions/
 
-using namespace std;
+##题目描述
+Given a 2D board containing 'X' and 'O', capture all regions surrounded by 'X'.
+给出一个2D图板，又字符'X'和'O'组成，捕捉被'X'包围的区域。
 
+A region is captured by flipping all 'O's into 'X's in that surrounded region.
+将被'X'包围的区域全部置为'X'就是对这个区域进行“逮捕”。
+
+For example,
+例如：
+
+    X X X X
+    X O O X
+    X X O X
+    X O X X
+
+After running your function, the board should be:
+在逮捕之后，应该变成：
+
+    X X X X
+    X X X X
+    X X X X
+    X O X X
+
+##解题思路
+广度优先遍历
+
+> 1. 最外层如果有O的话一定不会被包围
+> 2. 如果一个O不会被包围，那他的周围（上下左右）的O也不会被包围。
+
+##算法描述
+> 1. 拷贝原数据为copy
+> 2. 将周围一圈中的'O'入栈queue
+> 3. 原始数据的中间部分（除去周围一圈）全部置为'X'
+> 4. 当queue不为空时，取出栈顶元素，并判定其上下左右的4个位置的原始数据（copy中存储着原始数据）是否为'O'，如果是则将其置为'O'
+
+注意：为了防止重复访问，需要右标志位visited[x][y]来记录一个点是否已访问过。
+
+空间复杂度O(n)，时间复杂度O(n)。
+
+##代码 cpp
+
+```
 class MyPoint {
 public:
     int x;
@@ -78,27 +118,15 @@ public:
         }
     }
 };
+```
+> 完整代码[https://github.com/Orange1991/leetcode/blob/master/130/cpp/main.cpp](https://github.com/Orange1991/leetcode/blob/master/130/cpp/main.cpp)
 
-void out(vector<vector<char> > data) {
-    for (int i = 0; i < data.size(); ++i) {
-        for (int j = 0; j < data[i].size(); ++j)
-           cout << data[i][j];
-        cout << endl;
-    }
-    cout << endl;
-}
+##运行情况
+Status : Accept
+Time : 20ms
 
-int main() {
-    vector<vector<char> > board;
-    vector<char> b1; b1.push_back('X'); b1.push_back('X'); b1.push_back('X'); b1.push_back('X');
-    vector<char> b2; b2.push_back('X'); b2.push_back('O'); b2.push_back('O'); b2.push_back('X');
-    vector<char> b3; b3.push_back('X'); b3.push_back('X'); b3.push_back('O'); b3.push_back('X');
-    vector<char> b4; b4.push_back('X'); b4.push_back('O'); b4.push_back('X'); b4.push_back('X');
-    board.push_back(b1); board.push_back(b2); board.push_back(b3); board.push_back(b4);
-    out(board);
+##博文地址
+http://blog.csdn.net/smile_watermelon/article/details/47010835
 
-    Solution s;
-    s.solve(board);
-    out(board);
-    return 0;
-}
+---
+2015/7/22
