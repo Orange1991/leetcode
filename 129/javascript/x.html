@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style rel="stylesheet" type="text/css">
+    #answer { font-size: 120%; color: red; }
+    </style>
+    <script type="text/javascript">
+    /**i
+     * Definition for a binary tree node.
+     */
+    function TreeNode(val) {
+      this.val = val;
+      this.left = this.right = null;
+    }
+
+    /**
+     * @param {TreeNode} root
+     * @return {number}
+     */
+    var sumNumbers = function(root) {
+        var obj = {};
+        obj.sum = 0;
+        sumRootToLeaf(root, 0, obj);
+        return obj.sum;
+    };
+
+    var sumRootToLeaf = function(root, val, obj) {
+        if (root == null) return;
+       
+        val *= 10;
+        val += root.val;
+
+        if (root.left == null && root.right == null) {
+            obj.sum += val;
+            return;
+        }
+
+        sumRootToLeaf(root.left, val, obj);
+        sumRootToLeaf(root.right, val, obj);
+    };
+
+    var main = function() {
+        var n1 = new TreeNode(0), n2 = new TreeNode(3);
+        n1.left = n2;
+        document.getElementById("answer").innerHTML = sumNumbers(n1);
+    };
+    </script>
+  </head>
+  <body onload="main()">
+    <div>
+      <p>The Tree is :</p>
+      <pre>
+  0
+ /
+3  
+      </pre>
+    </div>
+    <div>The sum from root to leaf is : <span id="answer"></span></div>
+  </body>
+</html>
