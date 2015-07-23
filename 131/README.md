@@ -136,6 +136,21 @@ private:
 Status：Accept
 Time：72ms
 
+##测试用例
+
+    s = aab
+    [
+        [a,a,b],
+        [aa,b]
+    ]
+
+    s = bb
+    [
+        [b,b],
+        [bb]
+    ]
+
+
 ##博文地址
 http://blog.csdn.net/smile_watermelon/article/details/47026501
 
