@@ -81,8 +81,9 @@ struct ListNode* merge(struct ListNode* partOne, struct ListNode* partTwo) {
 
 ##运行情况
 | Language | Status | Time |
-| :------- | : ---- | :--- |
+| :------- | :----- | :--- |
 | c        | Accept | 24ms |
+
 
 ##博文地址
 http://blog.csdn.net/smile_watermelon/article/details/47187937
