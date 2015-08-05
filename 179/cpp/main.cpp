@@ -42,11 +42,12 @@ public:
 
 void test(vector<int> &nums) {
     Solution s; 
-    for (int i = 0, len = nums.size(); i < len; ++i) {
-        cout << nums[i] << " ";
+    cout << "[";
+    for (int i = 0, len = nums.size(); i < len - 1; ++i) {
+        cout << nums[i] << ",";
     }
-    cout << endl;
-    cout << s.largestNumber(nums) << endl;
+    if (nums.size() > 0) cout << nums[nums.size() - 1];
+    cout << "] : " << s.largestNumber(nums) << endl;
 }
 
 int main() {
