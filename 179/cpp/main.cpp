@@ -1,95 +1,43 @@
 #include <iostream>
 #include <vector>
+#include <stdio.h>
 #include <algorithm>
 
 using namespace std;
 
 class Solution {
 public:
+    /** 
+     * 生成最大数字
+     * @param nums 备选数字
+     * @return 最大数字字符串
+     */
     string largestNumber(vector<int>& nums) {   
-        vector<string> numStrs = transform(nums);
-        vector<string> strs = largestNumber("", numStrs);
+        int len = nums.size();
+
+        /* 数字转化为字符串 */
+        vector<string> strs;
+        for (int i = 0; i < len; ++i) {
+            char buff[20];
+            sprintf(buff, "%d", nums[i]);
+            strs.push_back(buff); 
+        }
+
+        /* 排序 */
+        sort(strs.begin(), strs.end(), cmp);
+
+        /* 拼接结果 */
         string ret;
-        for (int i = 0, len = strs.size(); i < len; ++i) ret += strs[i];
-        while (ret != "" && ret[0] == '0') ret = ret.substr(1);
-        if (ret == "") return "0";
-        return ret;
-    }
-
-private:
-    vector<string> largestNumber(string prefix, vector<string>& nums) {
-        vector<string> ret;
-        if (nums.size() == 0) return ret;
-        vector<vector<string> > groups(10, vector<string>());
-        int index = 0;
-        int count = 0;
-        for (int i = 0, len = nums.size(); i < len; ++i) {
-            if (nums[i] != "") {
-                index = nums[i][0] - '0';
-                groups[index].push_back(nums[i].substr(1));
-            } else
-                ++count;
-        }
-        int i;
-        vector<string> tmp;
-        if (prefix == "") {
-            for (i = 9; i > -1; --i) {
-                string prefixStr;
-                prefixStr += '0' + i;
-                tmp = largestNumber(prefixStr, groups[i]);
-                ret.insert(ret.end(), tmp.begin(), tmp.end());
-            }
-        } else {
-            int prefixValue = prefix[0] - '0';
-            for (i = 9; i > prefixValue; --i) {
-                string prefixStr;
-                prefixStr += '0' + i;
-                tmp = largestNumber(prefixStr, groups[i]);
-                for (int j = 0, len = tmp.size(); j < len; ++j) { 
-                    string str;
-                    str += prefix;
-                    str += tmp[j];
-                    ret.push_back(str);
-                }
-            }
-
-            for (int j = 0; j < count; ++j)
-                ret.push_back(prefix);
-            
-            for (; i > -1; --i) { 
-                string prefixStr;
-                prefixStr += '0' + i;
-                tmp = largestNumber(prefixStr, groups[i]);
-                for (int j = 0, len = tmp.size(); j < len; ++j) { 
-				    string str;
-	    			str += prefix;
-		    		str += tmp[j];
-			    	ret.push_back(str);
-                }
-            }
-        }
+        for (int i = 0; i < len; ++i) ret += strs[i];
+        
+        /* 特殊值0 */
+        if (ret == "" || ret[0] == '0') ret = "0";
 
         return ret;
     }
 
-    vector<string> transform(vector<int> &nums) {
-        int tmp = 0;
-        vector<string> ret;
-        for (int i = 0, len = nums.size(); i < len; ++i) {
-            tmp = nums[i];
-            string str;
-            if (tmp == 0) str = "0";
-            else {
-                while (tmp) {
-                    str += (tmp % 10 + '0');
-                    tmp /= 10;
-                }
-            }
-            reverse(str.begin(), str.end());
-            ret.push_back(str);
-        }
-        return ret;
-    }
+    /** 按照a+b和b+a的字典序判定a和b的“大小”关系 */
+    static bool cmp(string a, string b) { return a + b > b + a; }
 };
 
 void test(vector<int> &nums) {
@@ -141,6 +89,11 @@ int main() {
     nums.clear();
     nums.push_back(0);
     nums.push_back(0);
+    test(nums);
+
+    nums.clear();
+    nums.push_back(8247);
+    nums.push_back(824);
     test(nums);
 
     return 0;
