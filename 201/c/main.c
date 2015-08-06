@@ -1,10 +1,14 @@
 #include <stdio.h>
 
 int rangeBitwiseAnd(int m, int n) {   
-    int i = m + 1;
-    while (m && i <= n)
-        m &= i++;
-    return m;
+    int offset = 0;
+    while (m && n) {
+        if (m == n) return m << offset;
+        m >>= 1;
+        n >>= 1;
+        ++offset;
+    }
+    return 0;
 }
 
 void test(int m, int n) {
@@ -13,5 +17,7 @@ void test(int m, int n) {
 
 int main() {
     test(5, 7);
+    test(0, 2147483645);
+    test(600000000, 2147483645);
     return 0;
 }
