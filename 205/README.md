@@ -70,6 +70,33 @@ bool isIsomorphic(char* s, char* t) {
 
 > 完整代码　[https://github.com/Orange1991/leetcode/blob/master/205/c/main.c](https://github.com/Orange1991/leetcode/blob/master/205/c/main.c)
 
+##测试数据
+
+
+    s = egg,
+    t = add,
+    they are isomorphic.
+
+    s = foo,
+    t = bar,
+    they are not isomorphic.
+    
+    s = paper,
+    t = title,
+    they are isomorphic.
+    
+    s = a,
+    t = a,
+    they are isomorphic.
+    
+    s = ab,
+    t = ab,
+    they are isomorphic.
+
+    s = 13,
+    t = 42,
+    they are isomorphic.
+
 ##博文地址
 http://blog.csdn.net/smile_watermelon/article/details/47343219
 
