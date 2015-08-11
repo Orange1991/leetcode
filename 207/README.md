@@ -104,7 +104,7 @@ public:
 };
 ```
 
-> 完整代码 [ss]()
+> 完整代码 [https://github.com/Orange1991/leetcode/blob/master/207/cpp/dfs.cpp](https://github.com/Orange1991/leetcode/blob/master/207/cpp/dfs.cpp)
 
 ###bfs
 
@@ -157,7 +157,7 @@ public:
     }
 };
 ```
-> 完整代码 [ss]()
+> 完整代码 [https://github.com/Orange1991/leetcode/blob/master/207/cpp/bfs.cpp](https://github.com/Orange1991/leetcode/blob/master/207/cpp/bfs.cpp)
 
 ##测试数据
     (1) : 2, [[0,1]] : You can finish all the classes.
