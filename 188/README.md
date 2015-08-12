@@ -39,10 +39,12 @@ You may not engage in multiple transactions at the same time (ie, you must sell 
 
 global的推导公式如下：
 > global[i][j] = max(local[i][j], global[i-1][j]);
+
 即，到第i天完成j次交易的最大收益，要么是第j次交易发生在第i天时的最大收益，要么是到第i-1天完成j次交易时的最大收益。
 
 local的推导公式如下：
 > local[i][j] = max(global[i-1][j-1]+max(diff,0), local[i-1][j]+diff);
+
 需要看两个量，第一个是全局global到i-1天进行j-1次交易，然后加上今天的交易，如果今天是赚钱的话（也就是前面只要j-1次交易，最后一次交易取当前天）；第二个量则是取local第i-1天j次交易，然后加上今天的差值（这里因为local[i-1][j]比如包含第i-1天卖出的交易，所以现在变成第i天卖出，并不会增加交易次数，而且这里无论diff是不是大于0都一定要加上，因为否则就不满足local[i][j]必须在最后一天卖出的条件了）。
 
 代码请看代码一。
