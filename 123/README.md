@@ -23,6 +23,16 @@ $ max = max < formmer[i] + latter[i] ? fommer[i] + latter[i] : max $
 
 ps: 2015年小米春季实习生招聘在线笔试第二题就是这个题，不过当时我没刷这个题，但是还是做出来啦～
 
+---
+
+发现一个**更牛逼**的方法，时间复杂度O(n)，空间复杂度O(1)。
+
+博文 [http://blog.csdn.net/u012501459/article/details/46514309](http://blog.csdn.net/u012501459/article/details/46514309) 中的解法二。
+
+最原始贴：[https://leetcode.com/discuss/18330/is-it-best-solution-with-o-n-o-1](https://leetcode.com/discuss/18330/is-it-best-solution-with-o-n-o-1)
+
+*2015/8/12更新*
+
 ##算法描述
 > 1. 遍历，计算出第x天之前一次交易可以得到的最大收益，存储在formmer[n]中
 > 2. 遍历，计算出第x天之后一次交易可以得到的最大收益，存储在latter[n]中
