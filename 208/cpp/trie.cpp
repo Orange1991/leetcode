@@ -61,8 +61,7 @@ public:
             tmp = tmp->nodes[c - 'a'];
             word = word.substr(1);
         }
-        if (tmp == NULL) return false; // 如果没有后继结点，查找失败
-        return tmp->isLast; // 有后继结点，且isLast，查找成功
+        return tmp != NULL && tmp->isLast; // 有后继结点，且isLast，查找成功
     }
 
     /**
@@ -81,8 +80,7 @@ public:
             tmp = tmp->nodes[c - 'a'];
             prefix= prefix.substr(1);
         }
-        if (tmp == NULL) return false; // 如果没有后继结点，查找失败
-        else return true; // 查找成功
+        return tmp != NULL; // 如果没有后继结点，查找失败，否则查找成功
     }
 
 private:
