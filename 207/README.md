@@ -51,6 +51,8 @@ Hints:
 
 在判断有向图是否有环的问题上，bfs和dfs的区别仅在是按照**入度**还是**出度**来考虑问题上。
 
+另外，关于课程的具体顺序，详见[Leetcode 210 Course Schedule II](http://blog.csdn.net/smile_watermelon/article/details/47663819)
+
 ##代码
 
 ###dfs
