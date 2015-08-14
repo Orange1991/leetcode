@@ -28,18 +28,16 @@ the subarray [4,3] has the minimal length under the problem constraint.
 int minSubArrayLen(int s, int* nums, int numsSize) {
     if (numsSize <= 0) return 0;
     
-    int len = numsSize + 1, slow = 0, fast = 0, sum = *nums; // 初始化
+    int len = numsSize + 1, slow = 0, fast = 1, sum = *nums; // 初始化
     while (fast < numsSize) {
         while (fast < numsSize && sum < s) // 和小于s时fast往前移动
-            sum += *(nums + ++fast);
+            sum += *(nums + fast++);
 
-        if (fast == numsSize) break; // 移动至结尾，且sum仍小于s，结束
-
-        while (slow <= fast && sum >= s)  // 和大于等于s时，slow往前移动，试图缩小子数组
+        while (slow < fast && sum >= s)  // 和大于等于s时，slow往前移动，试图缩小子数组
             sum -= *(nums + slow++); // slow往前移动，并更新子数组局部和
         
-        if (len > fast - slow + 2)  // 试图缩小满足条件的子数组长度 
-            len = fast - slow + 2;
+        if (len > fast - slow + 1)  // 试图缩小满足条件的子数组长度 
+            len = fast - slow + 1;
     }
 
     // 如果len没有变化说明没有这样的子数组，返回0
