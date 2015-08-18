@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <unordered_set>
 
 using namespace std;
 
@@ -99,9 +100,10 @@ public:
         int rows = board.size(), cols = board.size() == 0 ? 0 : board[0].size();
         vector<vector<bool> > used(rows, vector<bool>(cols, false));
         vector<string> ret;
+        unordered_set<string> searched;
         for (int i = 0; i < rows; ++i)
             for (int j = 0; j < cols; ++j)
-                findWords(board, root, rows, cols, i, j, "", ret, used);
+                findWords(searched, board, root, rows, cols, i, j, "", ret, used);
         return ret;
     }
 private:
@@ -112,8 +114,10 @@ private:
             free(node->nodes[i]);
         delete(node);
     }
-    void findWords(vector<vector<char> >& board, TrieNode* node, int& rows, int& cols, int x, int y, 
+    void findWords(unordered_set<string> &searched, vector<vector<char> >& board, TrieNode* node, int& rows, int& cols, int x, int y, 
             string prefix, vector<string>& ret, vector<vector<bool> > used) {
+        if (searched.find(prefix) != searched.end()) return;
+        searched.insert(prefix);
         if (used[x][y]) return;
         char c = board[x][y];
         if (node->nodes[c - 'a'] == NULL) return;    
@@ -128,7 +132,7 @@ private:
             yy = y + dy[i];
             if (xx < 0 || xx >= rows || yy < 0 || yy >= cols)
                 continue;
-            findWords(board, node->nodes[c - 'a'], rows, cols, xx, yy, prefix + c, ret, used);
+            findWords(searched, board, node->nodes[c - 'a'], rows, cols, xx, yy, prefix + c, ret, used);
         }
     }
 };
