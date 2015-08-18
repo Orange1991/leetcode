@@ -117,13 +117,16 @@ private:
     void findWords(unordered_set<string> &searched, vector<vector<char> >& board, TrieNode* node, int& rows, int& cols, int x, int y, 
             string prefix, vector<string>& ret, vector<vector<bool> > used) {
         if (searched.find(prefix) != searched.end()) return;
-        searched.insert(prefix);
         if (used[x][y]) return;
         char c = board[x][y];
-        if (node->nodes[c - 'a'] == NULL) return;    
+        if (node->nodes[c - 'a'] == NULL) {
+            searched.insert(prefix + c);
+            return;
+        }    
         else if (node->nodes[c - 'a']->isLast 
-                && find(ret.begin(), ret.end(), prefix + c) == ret.end()) 
-            ret.push_back(prefix + c);
+                && find(ret.begin(), ret.end(), prefix + c) == ret.end()) {
+            ret.push_back(prefix + c); 
+        }
         used[x][y] = true;
         int dx[] = {-1, 0, 1, 0}, dy[] = {0, 1, 0, -1};
         int xx, yy;
