@@ -2,10 +2,12 @@
 #include <stdlib.h>
 
 /**
- * Return an array of size *returnSize.
- * Note: The returned array must be malloced, assume caller calls free().
+ * 找出仅出现一次的两个数字
+ * @param nums 数组，其中只有两个元素仅出现一次，其余元素均出现两次
+ * @param numsSize 数组大小
+ * @param returnSize 返回数组大小
+ * @return 仅出现一次的两个数字
  */
-
 int* singleNumber(int* nums, int numsSize, int* returnSize) {
     int* ret = (int*)malloc(sizeof(int) * 2);
     *returnSize = 2;
