@@ -6,4 +6,4 @@ s2.cpp 不使用Trie的startsWith和search，减少了重复查找，但使用�
 
 s3.cpp 使用Trie的startsWith和search，有重复查找，AC
 
-trie.cpp 使用board来构建字典树，构建过程超时，TLE
+s4.cpp 使用board来构建字典树，构建过程超时，TLE
