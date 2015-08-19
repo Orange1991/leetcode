@@ -23,16 +23,12 @@ public:
  */
 class Trie {
 public:
-    Trie(vector<string>& words) {
+    Trie() {
         root = new TrieNode();
         root->isLast = true; // 空串""存在于字典中
-        for (vector<string>::iterator it = words.begin(), end = words.end(); 
-                it != end; ++it) insert(*it);
     }
 
-    TrieNode* getRoot() {
-        return root;
-    }
+    TrieNode* getRoot() { return root; }
 
     /** 
      * insert a word into the trie. 插入一个单词
@@ -59,6 +55,7 @@ public:
 
 private:
     TrieNode* root;
+
     void free(TrieNode * node) {
         if (node == NULL) return;
         for (int i = 0; i < 26; ++i)
@@ -71,8 +68,10 @@ class Solution {
 public:
     vector<string> findWords(vector<vector<char> >& board, vector<string>& words) {
         // 创建字典树
-        Trie trie(words);
-        // 查找单词
+        Trie trie;
+        for (vector<string>::iterator it = words.begin(), end = words.end(); it != end; ++it)
+            trie.insert(*it);
+        // 查找
         vector<string> ret = findWords(board, trie);
         // 释放内存
         trie.free();
@@ -87,18 +86,17 @@ private:
      */
     vector<string> findWords(vector<vector<char> >& board, Trie& trie) {
         int rows = board.size(), cols = board.size() == 0 ? 0 : board[0].size();
-        vector<vector<bool> > used(rows, vector<bool>(cols, false));
         unordered_set<string> set;
         TrieNode* root = trie.getRoot();
         // 从任一字符开始，尝试查找单词
         for (int i = 0; i < rows; ++i)
             for (int j = 0; j < cols; ++j)
-                findWords(board, root, rows, cols, i, j, "", set, used);
+                findWords(board, root, rows, cols, i, j, "", set);
         vector<string> ret(set.begin(), set.end());
         return ret;
     }
 
-    /** 
+    /**
      * 查找单词
      * @param board 单词构造库
      * @param node 字典树结点
@@ -108,24 +106,25 @@ private:
      * @param y 当前字符所在位置的y坐标
      * @param prefix 当前单词
      * @param set 查找成功的单词
-     × @param used 字符是否已经使用的标志
      */
     void findWords(vector<vector<char> >& board, TrieNode* node, int& rows, int& cols, int x, int y, 
-            string prefix, unordered_set<string>& set, vector<vector<bool> >& used) {
+            string prefix, unordered_set<string>& set) {
         // 下标越界或者字符已经使用过，则退出
-        if (x < 0 || x >= rows || y < 0 || y >= cols || used[x][y]) return;
-        prefix += board[x][y]; // 扩展新单词
-        TrieNode* cur = node->nodes[board[x][y] - 'a']; // 获取字典树后继结点
+        if (x < 0 || x >= rows || y < 0 || y >= cols || board[x][y] == ' ') return;
+
+        char c = board[x][y]; // 当前字符
+        prefix += c; // 扩展新单词
+        TrieNode* cur = node->nodes[c - 'a']; // 获取字典树后继结点
         if (cur == NULL) return; // 后继为空，说明以当前prefix为前缀继续构造无法获得目标单词，退出
-        else if (cur->isLast) // 如果当前指针是单词结尾，则发现新单词
+        else if (cur->isLast)  // 如果当前指针是单词结尾，则发现新单词
             set.insert(prefix); // 添加
-        used[x][y] = true; // 表示当前字符已经使用过
+        board[x][y] = ' '; // 表示当前字符已经使用过
         // 继续向四周扩展
-        findWords(board, cur, rows, cols, x - 1, y, prefix, set, used);
-        findWords(board, cur, rows, cols, x + 1, y, prefix, set, used);
-        findWords(board, cur, rows, cols, x, y - 1, prefix, set, used);
-        findWords(board, cur, rows, cols, x, y + 1, prefix, set, used);
-        used[x][y] = false; // 修改，表示当前字符未使用过，可以继续使用
+        findWords(board, cur, rows, cols, x - 1, y, prefix, set);
+        findWords(board, cur, rows, cols, x + 1, y, prefix, set);
+        findWords(board, cur, rows, cols, x, y - 1, prefix, set);
+        findWords(board, cur, rows, cols, x, y + 1, prefix, set);
+        board[x][y] = c; // 修改，表示当前字符未使用过，可以继续使用
     }
 };
 

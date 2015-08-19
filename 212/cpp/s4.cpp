@@ -121,25 +121,23 @@ private:
         int rows = board.size(), cols = board.size() == 0 ? 0 : board[0].size();
         for (int i = 0; i < rows; ++i)
             for (int j = 0; j < cols; ++j) {
-            
-        vector<vector<bool> > used(rows, vector<bool>(cols, false));
-                construct(board, trie, rows, cols, i, j, "", used);
+                construct(board, trie, rows, cols, i, j, "");
             }
     }
-    void construct(vector<vector<char> >& board, Trie& trie, int& rows, int& cols, int x, int y, string prefix, vector<vector<bool> > used) {
-        if (x < 0 || x >= rows || y < 0 || y >= cols) return;
-        if (used[x][y] == true) return;
+    void construct(vector<vector<char> >& board, Trie& trie, int& rows, int& cols, int x, int y, string prefix) {
+        if (x < 0 || x >= rows || y < 0 || y >= cols || board[x][y] == ' ') return;
         char c = board[x][y];
         prefix += c;
-        used[x][y] = true;
         trie.insert(prefix);
         int dx[] = {-1, 0, 1, 0}, dy[] = {0, 1, 0, -1};
         int xx, yy;
+        board[x][y] = ' ';
         for (int i = 0; i < 4; ++i) {
             xx = x + dx[i];
             yy = y + dy[i];
-            construct(board, trie, rows, cols, xx, yy, prefix, used);
+            construct(board, trie, rows, cols, xx, yy, prefix);
         }
+        board[x][y] = c;
     }
 };
 
