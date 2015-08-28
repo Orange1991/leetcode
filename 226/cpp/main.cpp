@@ -16,21 +16,22 @@ public:
 
         TreeNode* nodeTop, * nodeBottom;
         while (!last.empty()) {
-            while (!last.empty()) {
+            while (!last.empty()) { // 把下一层结点链接到上一层结点上去
+                                    // 并反转下一层的结点
                 nodeTop = last.front();
                 last.pop();
                 nodeBottom = cur.front();
                 cur.pop();
-                nodeTop->left = nodeBottom;
-                if (nodeBottom) {
+                nodeTop->left = nodeBottom; // 把结点链接到上一层结点上去
+                if (nodeBottom) {   // 把当前层的结点反转，放入队列，以备下层循环使用
                     lastTmp.push(nodeBottom);
                     curTmp.push(nodeBottom->right);
                     curTmp.push(nodeBottom->left);
                 }
                 nodeBottom = cur.front();
                 cur.pop();
-                nodeTop->right = nodeBottom;
-                if (nodeBottom) {
+                nodeTop->right = nodeBottom; // 把结点链接到上一层结点上去
+                if (nodeBottom) {   // 把当前层的结点反转，放入队列，以备下层循环使用
                     lastTmp.push(nodeBottom);
                     curTmp.push(nodeBottom->right);
                     curTmp.push(nodeBottom->left);
