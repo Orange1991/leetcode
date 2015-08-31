@@ -18,7 +18,7 @@ int last = 0;
             *(l3 + cur) = *(ugly + cur) * 3;
             *(l5 + cur) = *(ugly + cur) * 5;
         }
-        l2max = *(l2 + cur - 1);
+        l2max = *(l2 + count - 1);
         mergeToUgly(ugly, &count, l2max, l2, &p2, l3, &p3, l5, &p5);
     if (last == count) break;
     last = count;
