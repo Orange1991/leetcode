@@ -10,5 +10,5 @@ https://leetcode.com/problems/different-ways-to-add-parentheses/
 > 实际上两者是一样的加括号方式。
 > 
 > 2. s2.cpp
-> 使用动态规划，将字符串拆分为子串，用子串的结果来构造原问题结果。
+> 使用分治法，将字符串拆分为子串，用子串的结果来构造原问题结果。
 > Accept.
